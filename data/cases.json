@@ -1,0 +1,148 @@
+{
+  "cases": [
+    {
+      "id": "caso_01_phishing",
+      "titulo": "Caso 01: O E-mail Suspeito",
+      "categoria": "Phishing / Engenharia Social",
+      "dificuldade": "Iniciante",
+      "descricao": "Um funcionário da empresa TechBrasil S.A. reportou que recebeu um e-mail pedindo suas credenciais de acesso ao sistema interno. Ele clicou no link, mas desconfiou e fechou a página antes de inserir a senha. O incidente foi reportado ao time de TI.",
+      "contexto": "Você é o Analista Jurídico-Digital responsável pelo caso. Sua missão é investigar o incidente, preservar as provas e tomar as decisões corretas conforme a legislação brasileira.",
+      "evidencias": [
+        {
+          "tipo": "E-mail Recebido",
+          "conteudo": "De: suporte.tecnico@techbrasil-seguranca.net\nPara: carlos.silva@techbrasil.com.br\nAssunto: [URGENTE] Atualização obrigatória de senha — Sistema TechBrasil\n\nPrezado colaborador,\n\nIdentificamos atividade suspeita em sua conta. Para proteger\nseu acesso, é necessário verificar sua identidade AGORA.\n\nClique aqui: http://techbras1l-sistema.xyz/login\n\nEquipe de Segurança TechBrasil"
+        },
+        {
+          "tipo": "Log de Acesso (firewall)",
+          "conteudo": "14:23:11 — Clique em link externo detectado (user: carlos.silva)\n14:23:15 — Redirecionamento para domínio não autorizado\n           → techbras1l-sistema.xyz (não pertence à empresa)\n14:23:18 — Página de login falsa carregada\n14:23:45 — Conexão encerrada pelo usuário (senha NÃO inserida)"
+        }
+      ],
+      "perguntas": [
+        {
+          "id": "q1",
+          "texto": "Qual deve ser o seu PRIMEIRO passo ao receber o relato do incidente?",
+          "opcoes": [
+            {
+              "texto": "Isolar o computador da rede imediatamente",
+              "correto": true,
+              "feedback": "Correto! Isolar o dispositivo evita contaminação da rede e preserva as evidências digitais intactas. Esta é a ação padrão recomendada pela ISO 27001 e pela ABNT NBR 27035 em resposta a incidentes.",
+              "efeitos": { "juridica": 10, "investigacao": 15, "provas": 15, "etica": 5, "risco": 15 }
+            },
+            {
+              "texto": "Deletar o e-mail malicioso imediatamente para proteger o sistema",
+              "correto": false,
+              "feedback": "Atenção! Deletar o e-mail destrói uma prova digital crucial. A preservação de evidências é fundamental para qualquer investigação e pode ser exigida em processos judiciais. A Lei 12.737/2012 e o Marco Civil preveem a necessidade de manter registros.",
+              "efeitos": { "juridica": -10, "investigacao": -20, "provas": -30, "etica": -5, "risco": -10 }
+            },
+            {
+              "texto": "Encaminhar o e-mail a todos os colegas para alertá-los",
+              "correto": false,
+              "feedback": "Cuidado! Encaminhar o e-mail pode expor mais pessoas ao ataque e contaminar a cadeia de custódia das provas. O procedimento correto é notificar apenas o time de segurança de forma controlada.",
+              "efeitos": { "juridica": -5, "investigacao": -10, "provas": -5, "etica": -10, "risco": -20 }
+            },
+            {
+              "texto": "Aguardar e monitorar se outros funcionários também receberam",
+              "correto": false,
+              "feedback": "Aguardar passivamente aumenta o risco de comprometimento de mais contas. A resposta a incidentes exige ação imediata. Monitorar pode ser feito em paralelo, mas nunca deve substituir o isolamento.",
+              "efeitos": { "juridica": 0, "investigacao": -15, "provas": -5, "etica": 0, "risco": -15 }
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "texto": "Como você deve preservar o e-mail malicioso como prova digital?",
+          "opcoes": [
+            {
+              "texto": "Exportar o e-mail com cabeçalhos completos e calcular o hash SHA-256 do arquivo",
+              "correto": true,
+              "feedback": "Excelente! Os cabeçalhos revelam o verdadeiro remetente, IPs e servidores utilizados. O hash SHA-256 garante a integridade da prova, fundamental para a cadeia de custódia e para validade em processos judiciais conforme o art. 11 do Marco Civil.",
+              "efeitos": { "juridica": 15, "investigacao": 20, "provas": 25, "etica": 10, "risco": 10 }
+            },
+            {
+              "texto": "Tirar um print da tela mostrando o e-mail",
+              "correto": false,
+              "feedback": "Um print é insuficiente como prova técnica: não captura os cabeçalhos (IP de origem, servidores de roteamento) e pode ser facilmente questionado em juízo por falta de integridade verificável.",
+              "efeitos": { "juridica": -5, "investigacao": -10, "provas": -15, "etica": 0, "risco": 0 }
+            },
+            {
+              "texto": "Imprimir o e-mail em papel e arquivar",
+              "correto": false,
+              "feedback": "Provas em papel perdem metadados técnicos essenciais (cabeçalhos, registros de roteamento) e têm menor valor probatório que evidências digitais devidamente preservadas com cadeia de custódia.",
+              "efeitos": { "juridica": -10, "investigacao": -5, "provas": -20, "etica": 0, "risco": 0 }
+            },
+            {
+              "texto": "Fazer imediatamente uma cópia forense completa do disco rígido",
+              "correto": false,
+              "feedback": "Uma cópia forense completa é desproporcional para este caso e consome tempo e recursos desnecessários. A preservação deve ser proporcional ao incidente — neste caso, o e-mail e os logs de acesso são suficientes.",
+              "efeitos": { "juridica": 5, "investigacao": 5, "provas": 10, "etica": 0, "risco": 5 }
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "texto": "Qual legislação brasileira foi PRINCIPALMENTE violada neste ataque de phishing?",
+          "opcoes": [
+            {
+              "texto": "Lei 12.737/2012 (Lei Carolina Dieckmann) — tipifica a invasão de dispositivos",
+              "correto": true,
+              "feedback": "Correto! A Lei 12.737/2012 incluiu o art. 154-A no Código Penal, tipificando a invasão de dispositivos alheios e a obtenção fraudulenta de dados. A tentativa de capturar credenciais via phishing se enquadra diretamente nesta lei.",
+              "efeitos": { "juridica": 25, "investigacao": 10, "provas": 5, "etica": 10, "risco": 5 }
+            },
+            {
+              "texto": "Apenas o Código Penal — crime de estelionato (art. 171)",
+              "correto": false,
+              "feedback": "O estelionato pode ser aplicado em conjunto, mas a legislação específica para crimes digitais (Lei 12.737/2012) tem precedência e é mais adequada, além de contar com penas específicas para o contexto digital.",
+              "efeitos": { "juridica": -15, "investigacao": 0, "provas": 0, "etica": 0, "risco": 0 }
+            },
+            {
+              "texto": "LGPD (Lei 13.709/2019) — por tratamento ilegal de dados pessoais",
+              "correto": false,
+              "feedback": "A LGPD regula o tratamento de dados por empresas e organizações, não a conduta criminosa de atacantes externos. Para responsabilizar penalmente o phisher, aplica-se a Lei 12.737/2012.",
+              "efeitos": { "juridica": -10, "investigacao": 0, "provas": 0, "etica": 0, "risco": 0 }
+            },
+            {
+              "texto": "Marco Civil da Internet (Lei 12.965/2014) — uso indevido da internet",
+              "correto": false,
+              "feedback": "O Marco Civil regula direitos e deveres no uso da internet, mas não tipifica crimes — é uma lei civil. Para responsabilização criminal, aplica-se a Lei 12.737/2012.",
+              "efeitos": { "juridica": -20, "investigacao": 0, "provas": 0, "etica": 0, "risco": 0 }
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "texto": "Após o incidente, a TechBrasil S.A. tem obrigação de notificar a ANPD?",
+          "opcoes": [
+            {
+              "texto": "Sim — qualquer incidente com risco a dados pessoais deve ser notificado à ANPD em prazo razoável (interpretado como 72 horas)",
+              "correto": true,
+              "feedback": "Correto! O art. 48 da LGPD obriga o controlador a comunicar à ANPD e aos titulares qualquer incidente de segurança com potencial de risco ou dano. A ANPD orienta a notificação em até 72 horas após o conhecimento do fato.",
+              "efeitos": { "juridica": 20, "investigacao": 5, "provas": 5, "etica": 15, "risco": 10 }
+            },
+            {
+              "texto": "Não — o funcionário não chegou a inserir a senha, então não há vazamento",
+              "correto": false,
+              "feedback": "Mesmo sem a senha comprometida, o simples acesso a uma página fraudulenta pode envolver exposição de metadados (IP, cookies, navegador). Além disso, outros dados corporativos podem ter sido afetados. A notificação preventiva é obrigação legal.",
+              "efeitos": { "juridica": -20, "investigacao": -5, "provas": 0, "etica": -15, "risco": -10 }
+            },
+            {
+              "texto": "Apenas se dados de clientes foram comprovadamente comprometidos",
+              "correto": false,
+              "feedback": "A obrigação de notificação se aplica a incidentes com *potencial* de risco a titulares, não apenas quando já houve comprometimento confirmado. A LGPD adota o princípio da precaução.",
+              "efeitos": { "juridica": -10, "investigacao": 0, "provas": 0, "etica": -5, "risco": -5 }
+            },
+            {
+              "texto": "Basta registrar internamente em um relatório de incidentes",
+              "correto": false,
+              "feedback": "Registrar internamente é necessário, mas insuficiente. A LGPD exige comunicação à ANPD e, quando aplicável, aos próprios titulares dos dados afetados — o relatório interno é apenas o ponto de partida.",
+              "efeitos": { "juridica": -15, "investigacao": 5, "provas": 5, "etica": -10, "risco": -5 }
+            }
+          ]
+        }
+      ],
+      "conclusao": {
+        "texto": "Investigação concluída!\n\nNeste caso você colocou em prática:\n• Resposta a incidentes de phishing (ISO 27035)\n• Preservação e cadeia de custódia de evidências digitais\n• Aplicação da Lei 12.737/2012 (Lei Carolina Dieckmann)\n• Obrigações da LGPD em incidentes de segurança (art. 48)\n\nO phishing é responsável por mais de 80% das violações de dados corporativas no Brasil. Conhecer os procedimentos corretos pode determinar o sucesso ou fracasso de uma investigação.",
+        "lei_referencia": "Lei 12.737/2012  •  LGPD — Lei 13.709/2019  •  Marco Civil — Lei 12.965/2014"
+      }
+    }
+  ]
+}
